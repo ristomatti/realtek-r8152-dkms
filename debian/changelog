@@ -1,3 +1,9 @@
+realtek-r8152-dkms (2.20.1-2) stable; urgency=medium
+
+  * Apply patch by Matthew Biederman <thebied@red.com> (https://github.com/wget/realtek-r8152-linux/pull/48)
+
+ -- Ristomatti Airo <ristomatti.airo@gmail.com>  Thu, 16 Oct 2025 22:10:05 -0700
+
 realtek-r8152-dkms (2.20.1-1) stable; urgency=medium
 
   * Update Realtek r8152 driver to 2.20.1
