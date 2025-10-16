@@ -1,6 +1,6 @@
 # Realtek r8152 DKMS
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/awesometic/realtek-r8152-dkms?sort=semver&style=for-the-badge)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ristomatti/realtek-r8152-dkms?sort=semver&style=for-the-badge)
 
 This provides Realtek r8152 driver in DKMS way so that you can keep the latest driver even after the kernel upgrade.
 
