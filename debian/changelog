@@ -1,8 +1,15 @@
+realtek-r8152-dkms (2.20.1-3) stable; urgency=medium
+
+  * Apply patch by FSE <dev@fsenterprise.de> (https://github.com/vidschofelix/realtek-r8152-linux/commit/985aad73e0310900c0eb326ac25bb0fb4bacbbef)
+    Fix dev_set_mac_address() call for Linux 6.16+ API change
+
+ -- Ristomatti Airo <ristomatti.airo@gmail.com>  Thu, 20 Sep 2025 22:58:59 +0200
+
 realtek-r8152-dkms (2.20.1-2) stable; urgency=medium
 
   * Apply patch by Matthew Biederman <thebied@red.com> (https://github.com/wget/realtek-r8152-linux/pull/48)
 
- -- Ristomatti Airo <ristomatti.airo@gmail.com>  Thu, 16 Oct 2025 22:10:05 -0700
+ -- Ristomatti Airo <ristomatti.airo@gmail.com>  Thu, 16 Oct 2025 22:10:05 +0200
 
 realtek-r8152-dkms (2.20.1-1) stable; urgency=medium
 
