@@ -1,0 +1,56 @@
+name: Release
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+-[0-9]+"
+jobs:
+  build-deb:
+    name: Build .deb on ${{ matrix.arch }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [amd64, arm64]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
+
+      - name: Build with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: debian:trixie-slim
+          options: >-
+            --platform linux/${{ matrix.arch }}
+            -v ${{ github.workspace }}:/workspace
+          run: |
+            set -eux
+            export DEBIAN_FRONTEND=noninteractive
+            apt-get update
+            apt-get install -qq -y devscripts debmake debhelper build-essential dkms dh-dkms git
+            cd /workspace
+            dpkg-buildpackage -b -rfakeroot -us -uc
+            mkdir build
+            mv ../*.deb ../*.changes ../*.buildinfo ./build
+            chmod a+rwx ./build
+      - name: Calculate SHA256 checksum
+        run: |
+          PACKAGE=$(find ./build -name "*_${{ matrix.arch }}.deb")
+          sha256sum "${PACKAGE}" > "${PACKAGE}.sha256"
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ./build/*
+          generate_release_notes: true
+          draft: true
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

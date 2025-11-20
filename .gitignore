@@ -3,6 +3,8 @@ debian/debhelper*
 debian/realtek-r8152-dkms*
 debian/files
 
+build
+
 .vscode/*
 
 .DS_Store
